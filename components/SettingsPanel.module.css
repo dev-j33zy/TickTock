@@ -89,6 +89,21 @@
   color: var(--text);
 }
 
+.formatField {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 0.75rem;
+  row-gap: 0.375rem;
+  align-items: center;
+}
+
+.milliToggle {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  cursor: pointer;
+}
+
 .field input[type="range"] {
   accent-color: var(--accent);
   width: 100%;

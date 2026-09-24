@@ -14,6 +14,7 @@ const DEFAULT_SETTINGS = {
   font: "inter",
   fontSize: 7,
   format: "hms",
+  showMilli: false,
   theme: "light",
   dev: false,
 };
@@ -65,9 +66,16 @@ export default function TimerApp() {
       ? Math.max(0, duration - accumulated - liveMs)
       : accumulated + liveMs;
 
+  const legacyMilli = typeof settings.format === "string" && settings.format.endsWith("Milli");
+  const showMilli = legacyMilli || settings.showMilli === true;
+  const format = legacyMilli ? settings.format.slice(0, -5) : settings.format;
+
   const displayText = formatTime(
-    mode === "countdown" ? Math.ceil(displayMs / 1000) : Math.floor(displayMs / 1000),
-    settings.format
+    showMilli
+      ? displayMs
+      : (mode === "countdown" ? Math.ceil(displayMs / 1000) : Math.floor(displayMs / 1000)) * 1000,
+    format,
+    showMilli
   );
 
   const progress =
@@ -183,7 +191,7 @@ export default function TimerApp() {
         </main>
 
       <SettingsPanel
-        settings={settings}
+        settings={{ ...settings, format, showMilli }}
         onChange={handleSettingsChange}
         duration={duration}
         onDurationChange={updateDuration}

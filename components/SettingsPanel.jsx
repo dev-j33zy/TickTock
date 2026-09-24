@@ -228,8 +228,9 @@ export default function SettingsPanel({ settings, onChange, duration, onDuration
               />
             </div>
 
-            <div className={styles.field}>
+            <div className={`${styles.field} ${styles.formatField}`}>
               <span>Time format</span>
+              <span>MILLISECONDS</span>
               <select
                 value={settings.format}
                 onChange={(e) => onChange({ format: e.target.value })}
@@ -240,6 +241,14 @@ export default function SettingsPanel({ settings, onChange, duration, onDuration
                   </option>
                 ))}
               </select>
+              <label className={styles.milliToggle}>
+                <input
+                  type="checkbox"
+                  className={styles.switch}
+                  checked={settings.showMilli}
+                  onChange={(e) => onChange({ showMilli: e.target.checked })}
+                />
+              </label>
             </div>
 
             <div className={styles.field}>
