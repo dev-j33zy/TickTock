@@ -118,8 +118,11 @@ export default function TimerApp() {
     const t = Date.now();
     setNow(t);
     setSession((s) => {
-      const remaining = mode === "countdown" ? Math.max(0, s.duration - s.accumulated) : 0;
-      return { ...s, accumulated: remaining <= 0 ? 0 : s.accumulated, startedAt: t };
+      if (mode === "countdown") {
+        const remaining = Math.max(0, s.duration - s.accumulated);
+        return { ...s, accumulated: remaining <= 0 ? 0 : s.accumulated, startedAt: t };
+      }
+      return { ...s, startedAt: t };
     });
   }
 
