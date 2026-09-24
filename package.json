@@ -20,5 +20,9 @@
   "devDependencies": {
     "eslint": "^9",
     "eslint-config-next": "16.2.6"
+  },
+  "allowScripts": {
+    "sharp": false,
+    "unrs-resolver": false
   }
 }
